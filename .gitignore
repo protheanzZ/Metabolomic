@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.ipynb_checkpoints
+data
+data_centroid
+peak3D*
+*.csv
+*.jupyterData
