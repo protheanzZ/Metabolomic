@@ -8,3 +8,4 @@ data_centroid
 peak3D*
 *.csv
 *.jupyterData
+*.RData
