@@ -1,0 +1,825 @@
+
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+<base href="https://fiehnlab.ucdavis.edu/staff/kind/metabolomics/ms-adduct-calculator"/>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Fiehnlab, metabolomics, research, mass spectrometry"/>
+	<meta name="generator" content="Joomla! - Open Source Content Management"/>
+	<title>Fiehn Lab - MS Adduct Calculator</title>
+	<link href="https://fiehnlab.ucdavis.edu/component/search/?Itemid=355&amp;format=opensearch" rel="search" title="Search Fiehn Lab" type="application/opensearchdescription+xml"/>
+	<link href="/templates/joomlage0071-simplex/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+	<link href="/index.php?option=com_ajax&plugin=arktypography&format=json" rel="stylesheet" type="text/css"/>
+	<link href="https://fiehnlab.ucdavis.edu/plugins/editors/dropeditor/dropeditor.css" rel="stylesheet" type="text/css"/>
+	<link href="https://fiehnlab.ucdavis.edu/plugins/editors/dropeditor/customstyles.css" rel="stylesheet" type="text/css"/>
+	<link href="https://fiehnlab.ucdavis.edu/plugins/editors/dropeditor/titlestyles.css" rel="stylesheet" type="text/css"/>
+	<link href="https://fiehnlab.ucdavis.edu/media/editors/arkeditor/css/squeezebox.css" rel="stylesheet" type="text/css"/>
+	<style type="text/css">ol.ol-circles>li:before{background-color:#333}ol.ol-boxes>li:before{background-color:#333}</style>
+	<script type="application/json" class="joomla-script-options new">{"csrf.token":"02ad43cc42d94c1727d5684458861a4c","system.paths":{"root":"","base":""},"system.keepalive":{"interval":840000,"uri":"\/component\/ajax\/?format=json"}}</script>
+	<script src="/media/jui/js/jquery.min.js?e3325629451e8492f061e3c490e44f74" type="text/javascript"></script>
+	<script src="/media/jui/js/jquery-noconflict.js?e3325629451e8492f061e3c490e44f74" type="text/javascript"></script>
+	<script src="/media/jui/js/jquery-migrate.min.js?e3325629451e8492f061e3c490e44f74" type="text/javascript"></script>
+	<script src="/media/system/js/caption.js?e3325629451e8492f061e3c490e44f74" type="text/javascript"></script>
+	<script src="/media/system/js/mootools-core.js?e3325629451e8492f061e3c490e44f74" type="text/javascript"></script>
+	<script src="/media/system/js/core.js?e3325629451e8492f061e3c490e44f74" type="text/javascript"></script>
+	<script src="/media/system/js/mootools-more.js?e3325629451e8492f061e3c490e44f74" type="text/javascript"></script>
+	<!--[if lt IE 9]><script src="/media/system/js/html5fallback.js?e3325629451e8492f061e3c490e44f74" type="text/javascript"></script><![endif]-->
+	<!--[if lt IE 9]><script src="/media/system/js/polyfill.event.js?e3325629451e8492f061e3c490e44f74" type="text/javascript"></script><![endif]-->
+	<script src="/media/system/js/keepalive.js?e3325629451e8492f061e3c490e44f74" type="text/javascript"></script>
+	<script src="/media/jui/js/bootstrap.min.js?e3325629451e8492f061e3c490e44f74" type="text/javascript"></script>
+	<script src="https://fiehnlab.ucdavis.edu/media/editors/arkeditor/js/jquery.easing.min.js" type="text/javascript"></script>
+	<script src="https://fiehnlab.ucdavis.edu/media/editors/arkeditor/js/squeezebox.min.js" type="text/javascript"></script>
+	<script type="text/javascript">jQuery(window).on('load',function(){new JCaption('img.caption');});jQuery(function($){initTooltips();$("body").on("subform-row-add",initTooltips);function initTooltips(event,container){container=container||document;$(container).find(".hasTooltip").tooltip({"html":true,"container":"body"});}});(function(){if(typeof jQuery=='undefined')return;jQuery(function($){if($.fn.squeezeBox){$('a.modal').squeezeBox({parse:'rel'});$('img.modal').each(function(i,el){$(el).squeezeBox({handler:'image',url:$(el).attr('src')});})}else if(typeof(SqueezeBox)!=='undefined'){$('img.modal').each(function(i,el){SqueezeBox.assign(el,{handler:'image',url:$(el).attr('src')});});}function jModalClose(){if(typeof(SqueezeBox)=='object')SqueezeBox.close();else
+ARK.squeezeBox.close();}});})();</script>
+
+   
+
+<link rel="stylesheet" href="/templates/system/css/system.css" type="text/css"/>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/reset.css" type="text/css"/>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/typo.css" type="text/css"/>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/bootstrap.css" type="text/css"/>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/template.css" type="text/css"/>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/nexus.css" type="text/css"/>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/responsive-nav.css" type="text/css"/>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/responsive-nav-style.css" type="text/css"/>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/responsive.css" type="text/css"/>
+
+
+<style type="text/css">body{font-family:Garamond,serif}</style>
+
+
+<style type="text/css">h2{font-family:Garamond,serif}</style>
+
+
+<style type="text/css">.module h3,.module_menu h3{font-family:Garamond,serif}</style>
+
+
+<style type="text/css">#hornav{font-family:Garamond,serif}</style>
+
+
+<style type="text/css">h1.logo-text a{font-family:Times\ New\ Roman,Times,serif}</style>
+
+
+
+
+<style type="text/css">.wrapper960{width:1020px}@media only screen and (min-width:960px) and (max-width:1020px){.wrapper960{width:960px!important}}body{background-color:#f9f4e5}.block_holder{padding:5px}body{font-size:14px}.content_vote .btn,.btn.dropdown-toggle,.pager.pagenav a,.pager a,.btn-primary,span.content_vote input.btn,.btn,.input-append .add-on,.input-prepend .add-on,.btn.active,.btn:active,.btn:hover,.pagination ul,.readmore a.btn{background-color:#ededed;border-color:#ededed}#main span.content_vote input.btn{background-color:#ededed!important}#main a.btn,#main a:hover.btn,button.btn,.pagenav,#main a.pagenav,#main a:hover.pagenav,#main ul.pager li.previous a,#main ul.pager li.next a,i,span.content_vote input.btn{color:#333!important}.caret{border-top:4px solid #333!important}#main div#editor-xtd-buttons.btn-toolbar div.btn-toolbar a.btn,span.add-on{color:#333!important;background-color:#ededed!important}.dropdown-menu li>a:hover,.dropdown-menu li>a:focus,.dropdown-submenu:hover>a{background-color:#ededed!important}.btn-group a.btn,.btn-group>.btn,.btn-group>.dropdown-menu{background-color:#ededed!important;border-color:#ededed!important}div.btn-group a.btn i,div.btn-group ul.dropdown-menu li a i,#main div.btn-group ul.dropdown-menu li a,#main div.btn-group ul.dropdown-menu li a:hover{color:#8c8c8c!important}div.btn-group a.btn span.caret{border-top:4px solid #8c8c8c!important}div.btn-group a.btn span.icon-cog{color:#8c8c8c!important}.form-search input,.form-search textarea,.form-search select,.form-search .help-inline,.form-search .uneditable-input,.form-search .input-prepend,.form-search .input-append,.form-inline input,.form-inline textarea,.form-inline select,.form-inline .help-inline,.form-inline .uneditable-input,.form-horizontal input,.form-horizontal textarea,.form-horizontal select,.form-horizontal .help-inline,.form-horizontal .uneditable-input,.form-horizontal .input-prepend,.form-horizontal .input-append{background-color:#fff!important;border-color:#fff!important;color:#000!important}div.tags span a.label{background-color:#dfc166!important}#main div.tags span a.label{color:#1a3e68!important}#container_header.container,#container_logo_menu_mobile,#container_social_mobile{background-color:#1a3e68;background-color:rgba(26,62,104)}#header.block_holder{background-color:#1a3e68;background-color:rgba(26,62,104)}#header.block_holder{margin-left:0}#header.block_holder{margin-right:0}#search input#mod-search-searchword.inputbox,#mobile_search .inputbox{background-color:#fff!important}#search input#mod-search-searchword.inputbox,#mobile_search .inputbox{color:#787878!important}#social ul li a{background-position:0 -40px}#custom{color:#fff}#custom a{color:#fff}#custom a:hover{color:#fff}#custom{top:0}#custom{right:0}#logo{left:0}#logo{top:0}h1.logo a{background-repeat:no-repeat}h1.logo-text a{color:#fff}p.site-slogan{color:#fff}#hornav ul li a{color:#fff}#subMenusContainer ul,#subMenusContainer ol{background-color:#fff}#subMenusContainer ul,#subMenusContainer ol{border:1px solid #ccc}#hornav li.active,#hornav li.visited,#hornav li:hover{background-color:#335379}#hornav li.active a,#hornav li.visited a,#hornav li:hover a{color:#dfc166}#hornav{background-color:#335379}#subMenusContainer a{color:#000}#subMenusContainer a:hover,#subMenusContainer a:focus,#subMenusContainer a.subMenuParentBtnFocused{color:#dfc166}#nav-toggle{background-color:#335379}#nav a{background-color:#335379}#nav a{color:#dfc166}#nav a{background-color:#335379}#nav ul ul a{color:#000}#nav ul ul a:hover{color:#dfc166}#nav ul ul a{background-color:#fff}#container_slideshow.container{background-color:#5f4769;background-color:rgba(95,71,105,.2)}.nivo-controlNavHolder{background-color:#fff;background-color:rgba(255,255,255,.1)}#container_slideshow.container{padding-top:40px}#container_slideshow.container{padding-bottom:40px}#container_top_modules.container{background-color:#5f4769;background-color:rgba(95,71,105)}#top_modules.block_holder{background-color:#4f3b57;background-color:rgba(79,59,87)}#top_modules{color:#fff!important}#top_modules a{color:#fff!important}#top_modules a:hover{color:#fff!important}#top_modules .module h3,#top_modules .module_menu h3{background-color:#fff}#top_modules .module h3,#top_modules .module_menu h3{background-color:transparent!important}#top_modules .module h3,#top_modules .module_menu h3{color:#fff!important}#top_modules .module ul.menu li a,#top_modules .module_menu ul.menu li a{color:#fff!important}#top_modules .module ul a,#top_modules .module_menu ul a{border-color:#fff!important}#top_modules .module ul.menu li a:hover,#top_modules .module_menu ul.menu li a:hover{color:#fff!important}#top_modules .module ul a:hover,#top_modules .module_menu ul a:hover{border-color:#fff!important}#container_top_modules.container{padding-top:40px}#container_top_modules.container{padding-bottom:40px}#top_modules .module h3,#top_modules .module_menu h3{padding-left:0}#top_modules .module h3,#top_modules .module_menu h3{padding-right:0}#container_main.container{background-color:#f9f4e5;background-color:rgba(249,244,229)}#main.block_holder{background-color:#fff;background-color:rgba(255,255,255)}#content_full h2,#content_full h2 a:link,#content_full h2 a:visited,#content_full .content_header,#content_full .articleHead,#content_remainder h2,#content_remainder h2 a:link,#content_remainder h2 a:visited,#content_remainder .content_header,#content_remainder .articleHead{color:#1a3e68!important}#main,ul.breadcrumb li span{color:#000!important}#main a,.module ul.breadcrumb li a,.module_menu ul.breadcrumb li a{color:#4d688c!important}#main a:hover{color:#dfc166!important}#main .module h3,#main .module_menu h3{background-color:#fff}.sidecol_block .module h3,.sidecol_block .module_menu h3,.contenttop .module h3,.contenttop .module_menu h3,.contentbottom .module h3,.contentbottom .module_menu h3{background-color:transparent!important}.sidecol_block .module h3,.sidecol_block .module_menu h3,.contenttop .module h3,.contenttop .module_menu h3,.contentbottom .module h3,.contentbottom .module_menu h3{color:#1a3e68!important}#main .module ul.menu li a,#main .module_menu ul.menu li a{color:#4d688c!important}#main .module ul a,#main .module_menu ul a{border-color:#4d688c!important}#main .module ul.menu li a:hover,#main .module_menu ul.menu li a:hover{color:#dfc166!important}#main .module ul a:hover,#main .module_menu ul a:hover{border-color:#dfc166!important}#container_main.container{padding-top:0}#container_main.container{padding-bottom:0}#main .module h3,#main .module_menu h3{padding-left:0}#main .module h3,#main .module_menu h3{padding-right:0}div#slide-contact.accordion div.accordion-group div.accordion-heading{background-color:#fff!important}#container_base.container{background-color:#dfc166;background-color:rgba(223,193,102,1)}#base.block_holder{background-color:#fff;background-color:rgba(255,255,255,0)}#base{color:#5c5c5c!important}#base a{color:#5c5c5c!important}#base a:hover{color:#5c5c5c!important}#base .module h3,#base .module_menu h3{background-color:#fff}#base .module h3,#base .module_menu h3{background-color:transparent!important}#base .module h3,#base .module_menu h3{color:#5c5c5c}#base .module ul.menu li a,#base .module_menu ul.menu li a{color:#5c5c5c!important}#base .module ul a,#base .module_menu ul a{border-color:#5c5c5c!important}#base .module ul.menu li a:hover,#base .module_menu ul.menu li a:hover{color:#5c5c5c!important}#base .module ul a:hover,#base .module_menu ul a:hover{border-color:#5c5c5c!important}#container_base.container{padding-top:0}#container_base.container{padding-bottom:0}#base .module h3,#base .module_menu h3{padding-left:0}#base .module h3,#base .module_menu h3{padding-right:0}#container_copyright_footermenu.container{background-color:#f9f4e5;//    background-color: rgba(249,244,229,  )}#copyright-footermenu.block_holder{background-color:#f9f4e5;//    background-color: rgba(249,244,229,  )}#copyright-footermenu{color:#1a3e68!important}#copyright-footermenu a{color:#1a3e68!important}#copyright-footermenu a:hover{color:#dfc166!important}#footermenu ul li a{color:#1a3e68!important}#footermenu ul li a{border-color:#1a3e68!important}#footermenu ul li a:hover{color:#dfc166!important}#footermenu ul li a:hover{border-color:#dfc166!important}#container_copyright_footermenu.container{padding-top:0}#container_copyright_footermenu.container{padding-bottom:0}#sidecol_a{width:20%}#sidecol_b{width:20%}#sidecol_a{float:left}#sidecol_b{float:left}#content_remainder{float:left}.wrapper960{width:70%}#main{min-height:800px}.bor-bot{margin:10px 0;position:relative;width:100%;height:5px;background:linear-gradient(to right,#f7cc4a 0,rgba(247,204,74,.1) 55%,rgba(247,204,74,.1) 100%);filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f7cc4a', endColorstr='#1af7cc4a', GradientType=1 )}</style>
+
+
+
+
+
+	<style type="text/css">@media only screen and (max-width:767px){#container_bottom_modules{display:none!important}}</style>
+
+
+	<style type="text/css">@media only screen and (max-width:1024px){#social{display:none!important}}</style>
+
+
+
+<!-- Hornav Responsive Menu -->
+<script type="text/javascript" src="/templates/joomlage0071-simplex/js/responsive-nav/responsive-nav.js" charset="utf-8"></script>
+
+
+<!-- Hornav Dropdown -->
+<script type="text/javascript" src="/templates/joomlage0071-simplex/js/dropdown.js" charset="utf-8"></script>
+<script type="text/javascript">window.addEvent('domready',function(){var myMenu=new MenuMatic();});</script>
+
+<!-- Scroll to Top -->
+<script type="text/javascript">var $k=jQuery.noConflict();$k(document).ready(function(){$k(window).scroll(function(){if($k(this).scrollTop()>500){$k('.scrollup').fadeIn();}else{$k('.scrollup').fadeOut();}});$k('.scrollup').click(function(){$k("html, body").animate({scrollTop:0},900);return false;});});</script> 
+
+<!--[if IE 10]>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/ie10.css" rel="stylesheet" type="text/css" />
+<![endif]-->  
+
+<!--[if IE 9]>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/ie9.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+<!--[if IE 8]>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/ie8.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+<!--[if IE 7]>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/ie7.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+<!--[if IE 6]>
+<script type="text/javascript" src="/templates/joomlage0071-simplex/js/fix-png-ie6.js"></script>
+<link rel="stylesheet" href="/templates/joomlage0071-simplex/css/ie6.css" rel="stylesheet" type="text/css" />
+<script src="/templates/joomlage0071-simplex/js/ie6/warning.js"></script><script>window.onload=function(){e("/templates/joomlage0071-simplex/js/ie6/")}</script>
+<![endif]-->
+
+<script type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-90294311-1','auto');ga('send','pageview');</script></head>
+
+
+<body>
+<a href="#" class="scrollup">Scroll</a>
+
+<div id="container_header" class="container">
+<!--<div class="wrapper960">-->
+<div id="header" class="block_holder">
+<!--	<div class="clear"></div>-->
+
+	<div id="header_items">
+		
+				<div id="search">
+		<div class="search">
+	<form action="/staff/kind/metabolomics/ms-adduct-calculator" method="post" class="form-inline">
+		<label for="mod-search-searchword0" class="element-invisible">Search ...</label> <input name="searchword" id="mod-search-searchword0" maxlength="200" class="inputbox search-query input-medium" type="search" placeholder="Search ..."/>		<input type="hidden" name="task" value="search"/>
+		<input type="hidden" name="option" value="com_search"/>
+		<input type="hidden" name="Itemid" value="355"/>
+	</form>
+</div>
+				</div>
+
+		
+				</div>
+
+		<div id="logo"><div class="logo_container"></div></div>
+
+        <div id="hornav">
+        
+<ul class="menu" id="moomenu">
+<li class="item-101"><a href="/">Home</a></li><li class="item-104 active"><a href="/staff">Members</a></li><li class="item-102 deeper parent"><a href="/projects">Projects</a><ul><li class="item-180"><a href="/projects/ccid">Cheminformatics &amp; Compound ID</a></li><li class="item-181"><a href="/projects/softwaredev">Databases &amp; Software Development</a></li><li class="item-182"><a>Novel Technologies</a>
+</li></ul></li><li class="item-105"><a href="/publications">Publications</a></li><li class="item-501 deeper parent"><a href="/events/month.calendar/2019/04/02/-">Events</a><ul><li class="item-503"><a href="/events/fiehnlab-seminars/month.calendar/2019/04/02/-">Fiehnlab Seminars</a></li></ul></li><li class="item-137"><a href="/instrumentation">Instrumentation</a></li><li class="item-155 deeper parent"><a>Administration</a>
+<ul><li class="item-535"><a href="/admin/login">Login</a></li></ul></li></ul>
+        </div>
+
+		<div id="social">
+			<ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+						</ul>
+		</div>	
+
+		<div class="clear"></div>
+	</div>
+
+</div>
+<!--</div>-->
+</div>
+
+<div id="container_logo_menu_mobile" class="container"><div class="wrapper960">
+<div id="logo_mobile">
+      
+	    </div>
+
+<div id="nav">
+    
+<ul class="menu" id="mobile">
+<li class="item-101"><a href="/">Home</a></li><li class="item-104 active"><a href="/staff">Members</a></li><li class="item-102 deeper parent"><a href="/projects">Projects</a><ul><li class="item-180"><a href="/projects/ccid">Cheminformatics &amp; Compound ID</a></li><li class="item-181"><a href="/projects/softwaredev">Databases &amp; Software Development</a></li><li class="item-182"><a>Novel Technologies</a>
+</li></ul></li><li class="item-105"><a href="/publications">Publications</a></li><li class="item-501 deeper parent"><a href="/events/month.calendar/2019/04/02/-">Events</a><ul><li class="item-503"><a href="/events/fiehnlab-seminars/month.calendar/2019/04/02/-">Fiehnlab Seminars</a></li></ul></li><li class="item-137"><a href="/instrumentation">Instrumentation</a></li><li class="item-155 deeper parent"><a>Administration</a>
+<ul><li class="item-535"><a href="/admin/login">Login</a></li></ul></li></ul>
+</div>
+<div class="clear"></div></div></div>
+
+<div id="container_social_mobile" class="container"><div class="wrapper960">
+<div id="social_mobile" class="block_holder">  
+	<div id="header_items">
+        <div id="social">
+            <ul>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                        </ul>
+        </div>  
+
+    <div id="mobile_search">
+        <div class="search">
+	<form action="/staff/kind/metabolomics/ms-adduct-calculator" method="post" class="form-inline">
+		<label for="mod-search-searchword0" class="element-invisible">Search ...</label> <input name="searchword" id="mod-search-searchword0" maxlength="200" class="inputbox search-query input-medium" type="search" placeholder="Search ..."/>		<input type="hidden" name="task" value="search"/>
+		<input type="hidden" name="option" value="com_search"/>
+		<input type="hidden" name="Itemid" value="355"/>
+	</form>
+</div>
+    </div>
+
+
+</div>
+
+</div>
+</div></div>
+
+
+
+<div id="container_maincontent_bg">
+<div id="container_main" class="container"><div class="wrapper960">
+<!--Setting up Layout for MainContent and Side Columns. Check to see if modules are enabled or disabled in the sidecolumns-->
+
+<div id="main" class="block_holder">
+
+<!--Side Columns Layout-->                          
+       
+    
+<!--End Side Columns Layout-->
+
+<!--Find Content width and show component area-->
+<div id="content_full" class="side_margins">
+
+
+ 	<div class="maincontent">
+            <div class="message">
+                                    <div id="system-message-container">
+	</div>
+
+                            </div>
+        <div class="item-page" itemscope itemtype="https://schema.org/Article">
+	<meta itemprop="inLanguage" content="en-GB"/>
+	
+		
+			<div class="page-header">
+					<h2 itemprop="headline">
+				Mass Spectrometry Adduct Calculator			</h2>
+									</div>
+					
+		
+	
+	
+		
+									<div itemprop="articleBody">
+		<div class="tableContainer">
+<div class="tableRow">
+<div id="tobiasmenu">
+
+
+ 
+
+
+
+
+		<div class="moduletable">
+						
+<ul class="menu">
+<li class="item-353 alias-parent-active deeper parent"><a href="/staff/kind/metabolomics">Metabolomics</a><ul><li class="item-239 deeper parent"><a href="/staff/kind/metabolomics/peak-alignment">Peak_Alignment</a><ul><li class="item-357"><a href="/staff/kind/metabolomics/peak-alignment/mzmine">mzmine</a></li><li class="item-356"><a href="/staff/kind/metabolomics/peak-alignment/xcms">xcms</a></li></ul></li><li class="item-358 active"><a href="/staff/kind/metabolomics/ms-adduct-calculator">MS Adduct Calculator</a></li><li class="item-444"><a href="/staff/kind/metabolomics/structure-elucidation">Structure Elucidation</a></li><li class="item-360 deeper parent"><a href="/staff/kind/metabolomics/lipidanalysis">LipidAnalysis</a><ul><li class="item-361"><a href="/staff/kind/metabolomics/lipidanalysis/irganox">Irganox</a></li></ul></li><li class="item-362"><a href="/staff/kind/metabolomics/rosettastone">RosettaStone</a></li><li class="item-197"><a href="/staff/kind/metabolomics/mass-spec-imaging">Mass Spectral Imaging</a></li><li class="item-364"><a href="/staff/kind/metabolomics/lims">LIMS</a></li><li class="item-489"><a href="/staff/kind/metabolomics/dtd-gc-tof-ms">DTD-GC-TOF-MS</a></li><li class="item-491"><a href="/staff/kind/metabolomics/flux-analysis">Flux-analysis</a></li></ul></li><li class="item-354 deeper parent"><a href="/staff/kind/chemoinformatics">ChemoInformatics</a><ul><li class="item-365 deeper parent"><a href="/staff/kind/chemoinformatics/tools">Tools</a><ul><li class="item-366"><a href="/staff/kind/chemoinformatics/tools/cdk">CDK</a></li></ul></li><li class="item-367"><a href="/staff/kind/chemoinformatics/databases">Databases</a></li><li class="item-368 deeper parent"><a href="/staff/kind/chemoinformatics/concepts">Concepts</a><ul><li class="item-369"><a href="/staff/kind/chemoinformatics/concepts/isomers">Isomers</a></li><li class="item-370"><a href="/staff/kind/chemoinformatics/concepts/stereoisomers">Stereoisomers</a></li><li class="item-371"><a href="/staff/kind/chemoinformatics/concepts/tautomers">Tautomers</a></li><li class="item-372"><a href="/staff/kind/chemoinformatics/concepts/3d-conformer">3D-Conformer</a></li><li class="item-373"><a href="/staff/kind/chemoinformatics/concepts/descriptors">Descriptors</a></li><li class="item-374"><a href="/staff/kind/chemoinformatics/concepts/substructure-mining">Substructure Mining</a></li><li class="item-375"><a href="/staff/kind/chemoinformatics/concepts/visualization">Visualization</a></li></ul></li></ul></li><li class="item-376 deeper parent"><a href="/staff/kind/statistics">Statistics</a><ul><li class="item-377"><a href="/staff/kind/statistics/tools">Tools</a></li><li class="item-378 deeper parent"><a href="/staff/kind/statistics/concepts">Concepts</a><ul><li class="item-379"><a href="/staff/kind/statistics/concepts/feature-selection">Feature_Selection</a></li><li class="item-380"><a href="/staff/kind/statistics/concepts/regression">Regression</a></li><li class="item-381"><a href="/staff/kind/statistics/concepts/classification">Classification</a></li><li class="item-382"><a href="/staff/kind/statistics/concepts/4metabolomics">4Metabolomics</a></li><li class="item-383"><a href="/staff/kind/statistics/concepts/roc">ROC Curves</a></li><li class="item-384"><a href="/staff/kind/statistics/concepts/opls-plsda">OPLS vs PLSDA vs PLS</a></li></ul></li></ul></li><li class="item-385"><a href="/staff/kind/quick-science-column">Quick Science</a></li><li class="item-386"><a href="/staff/kind/external-links">External Links</a></li><li class="item-387 deeper parent"><a href="/staff/kind/metabolomics-literature-review">Literature Review</a><ul><li class="item-390"><a href="/staff/kind/metabolomics-literature-review/boiling-points">Boiling_Points</a></li><li class="item-392"><a href="/staff/kind/metabolomics-literature-review/chemometrics">Chemometrics</a></li><li class="item-393"><a href="/staff/kind/metabolomics-literature-review/ft-ms">FT-MS</a></li><li class="item-394"><a href="/staff/kind/metabolomics-literature-review/nmr">NMR</a></li><li class="item-395"><a href="/staff/kind/metabolomics-literature-review/ms">MS</a></li><li class="item-396"><a href="/staff/kind/metabolomics-literature-review/chemical-ionization">Chemical Ionization</a></li><li class="item-398"><a href="/staff/kind/metabolomics-literature-review/gcxgc">GCxGC</a></li><li class="item-399"><a href="/staff/kind/metabolomics-literature-review/inchi">INCHI</a></li><li class="item-400"><a href="/staff/kind/metabolomics-literature-review/dendral">DENDRAL</a></li><li class="item-401"><a href="/staff/kind/metabolomics-literature-review/multicapillary-gc">Multicapillary GC</a></li><li class="item-402"><a href="/staff/kind/metabolomics-literature-review/ms-interpretation">MS Interpretation</a></li><li class="item-404"><a href="/staff/kind/metabolomics-literature-review/molgen">MOLGEN</a></li><li class="item-405"><a href="/staff/kind/metabolomics-literature-review/orbitrap">Orbitrap</a></li><li class="item-406"><a href="/staff/kind/metabolomics-literature-review/hplc">HPLC</a></li><li class="item-408"><a href="/staff/kind/metabolomics-literature-review/statistics">Statistics</a></li><li class="item-409"><a href="/staff/kind/metabolomics-literature-review/qsar">QSAR</a></li><li class="item-410"><a href="/staff/kind/metabolomics-literature-review/cosmo">COSMO</a></li><li class="item-411"><a href="/staff/kind/metabolomics-literature-review/qspr">QSPR</a></li><li class="item-412"><a href="/staff/kind/metabolomics-literature-review/retention-index">Retention_Index</a></li><li class="item-413"><a href="/staff/kind/metabolomics-literature-review/isotopic-pattern">Isotopic_Pattern</a></li><li class="item-414"><a href="/staff/kind/metabolomics-literature-review/design-of-experiment">Experimental_Design</a></li><li class="item-415"><a href="/staff/kind/metabolomics-literature-review/thermal-desorption">Thermal_Desorption</a></li><li class="item-416"><a href="/staff/kind/metabolomics-literature-review/fast-gc">Fast_GC</a></li><li class="item-417"><a href="/staff/kind/metabolomics-literature-review/ms-simulation">MS_Simulation</a></li><li class="item-419"><a href="/staff/kind/metabolomics-literature-review/databases">Databases</a></li><li class="item-421"><a href="/staff/kind/metabolomics-literature-review/structure-elucidation">Structure_Elucidation</a></li><li class="item-422"><a href="/staff/kind/metabolomics-literature-review/feature-selection">Feature Selection</a></li><li class="item-423"><a href="/staff/kind/metabolomics-literature-review/natural-products">Natural_Products</a></li><li class="item-425"><a href="/staff/kind/metabolomics-literature-review/pah">PAH</a></li><li class="item-426"><a href="/staff/kind/metabolomics-literature-review/stereoisomers">Stereoisomers</a></li><li class="item-427"><a href="/staff/kind/metabolomics-literature-review/inverse-qsar">INVERSE-QSAR-QSPR</a></li></ul></li><li class="item-428 deeper parent"><a href="/staff/kind/collector">Collector</a><ul><li class="item-431 deeper parent"><a href="/staff/kind/collector/benchmark">Benchmark</a><ul><li class="item-432 deeper parent"><a href="/staff/kind/collector/benchmark/blast-benchmark">Blast Benchmark</a><ul><li class="item-433"><a href="/staff/kind/collector/benchmark/blast-benchmark/makefile">Makefile</a></li></ul></li><li class="item-434"><a href="/staff/kind/collector/benchmark/java-benchmark">JAVA vs C++ Benchmark</a></li><li class="item-435"><a href="/staff/kind/collector/benchmark/arraylist">ArrayList</a></li><li class="item-436"><a href="/staff/kind/collector/benchmark/core-i7-vs-opteron">Core-i7-vs-Opteron</a></li><li class="item-437"><a href="/staff/kind/collector/benchmark/ramdisk">RamDisk</a></li><li class="item-438"><a href="/staff/kind/collector/benchmark/7zip-benchmark">7ZIP-Benchmark</a></li></ul></li><li class="item-439"><a href="/staff/kind/collector/programming">Programming</a></li><li class="item-440"><a href="/staff/kind/collector/cell-counting">Cell_Counting</a></li><li class="item-441"><a href="/staff/kind/collector/clustersupport">ClusterSupport</a></li><li class="item-442"><a href="/staff/kind/collector/oracle">Oracle</a></li><li class="item-443 deeper parent"><a href="/staff/kind/collector/statistica">Statistica</a><ul><li class="item-484"><a href="/staff/kind/collector/statistica/allow-access-to-helpfiles-stored-on-network">Allow access to helpfiles stored on network</a></li><li class="item-482"><a href="/staff/kind/collector/statistica/statsoft-statistica-beware-of-101">Statsoft Statistica Beware of 101</a></li></ul></li></ul></li><li class="item-429"><a href="/staff/kind/teaching">Teaching</a></li><li class="item-430"><a href="/staff/kind/publications">Publications</a></li></ul>
+		</div>
+	</div>
+<div class="tcontent">
+<p>This calculator allows to identify some adduct ions from ESI-MS (electrospray) mass spectrometry measurements or other soft ionization techniques like CI-MS or FI-MS or FD-MS or APCI-MS or MALDI-TOF. Actually this task should be done by every good LC-MS software automatically, directly integrated, no questions asked. You may check out <a href="http://acdlabs.com/products/spec_lab/exp_spectra/ms/intellixtract/features.html" target="_blank">IntelliXtract</a> or <a href="http://msbi.ipb-halle.de/msbi/esi/" target="_blank">esi</a> - a R package for annotation of LC/ESI-MS Mass Signals using xcms. The successful detection of adduct ions requires either pure mass spectra or a deconvolution and peak detection or peak picking step prior adduct assignment.</p>
+<p>This template is based on an table from: Huang N.; Siegel M.M.1; Kruppa G.H.; Laukien F.H.; J Am Soc Mass Spectrom 1999, 10, 1166&ndash;1173; <strong>Automation of a Fourier transform ion cyclotron resonance mass spectrometer for acquisition, analysis, and e-mailing of high-resolution exact-mass electrospray ionization mass spectral data </strong>[<a href="http://dx.doi.org/10.1016/S1044-0305(99)00089-6" target="_blank">DOI</a>]. Another important source also including contaminations (solvents, plasticisers, repeating units, solvent clusters) is hidden in the supplement section of <strong>Interferences and contaminants encountered in modern mass spectrometry</strong> (Bernd O. Keller, Jie Sui, Alex B. Young and Randy M. Whittal, ANALYTICA CHIMICA ACTA, 627 (1): 71-81) [<a href="http://dx.doi.org/10.1016/j.aca.2008.04.043" target="_blank">DOI</a>]</p>
+<p>Download the EXCEL table here as [<a href="/downloads/staff/kind/Metabolomics/MS-Adduct-Calculator/ESI-MS-adducts.xls">XLS</a>] or [<a href="/downloads/staff/kind/Metabolomics/MS-Adduct-Calculator/ESI-MS-adducts.zip">ZIP</a>]. Please check the values carefully, some of the table ion names were lost during translation, for high mass accuracy the <a href="/downloads/staff/kind/Metabolomics/MS-Adduct-Calculator/mass-of-electron-error.xls">mass of the electron</a> must be included (thanks to Jason and Matt) [<a href="http://dx.doi.org/10.1002/rcm.3102" target="_blank">DOI</a>].</p>
+<p>If you are interested in <strong>molecular formula determination</strong> or determination of <strong>elemental compositions</strong> and subsequent isomer structure annotation you may find the <a href="/projects/seven-golden-rules">Seven Golden Rules</a> helpful. After removal of adducts you can enter your results into the <a href="/projects/seven-golden-rules/software">Seven Golden Rules software</a> and find highly probable elemental compositions. These elemental compositions can be matched against molecular compound databases to get a first hint of a possible isomer structure. The <a href="/projects/seven-golden-rules">Seven Golden Rules</a> can be used for low resolution and high resolution mass spectral data.</p>
+<p>For quick calculation of formula masses use the Molecular Weight Calculator.<br/> <a href="http://www.alchemistmatt.com/mwtwin.html" target="_blank">http://www.alchemistmatt.com/mwtwin.html</a><br/> <a href="http://ncrr.pnl.gov/software/" target="_blank">http://ncrr.pnl.gov/software/</a></p>
+<p>Example: 1) Find Adduct: Taxol, C47H51NO14, M=853.33089 <br/>Enter 853.33089 in green box read M+22.9, m/z=876.320108 <br/> <br/> 2) Reverse: take 12 Tesla-FT-MS result out of MS m/z=876.330<br/>suspect M+Na adduct, read M=853.340782, enter this value into formula finder with 2 ppm mass accuracy (CHNSOP enabled) get some thousand results, compare isotopic pattern, get happy.</p>
+<div>&nbsp;</div>
+<table border="0" style="width: 100%; font-size: 12.144px;" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td colspan="7">Table 1. Monoisotopic exact masses of molecular ion adducts often observed in ESI mass spectra</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>Your M here:</td>
+<td>Your M+X or M-X</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>853.33089</td>
+<td>876.32</td>
+</tr>
+<tr>
+<td><strong>Ion name</strong></td>
+<td><strong>Ion mass</strong></td>
+<td><strong>Charge </strong></td>
+<td><strong>Mult</strong></td>
+<td><strong>Mass</strong></td>
+<td><strong>Result:</strong></td>
+<td><strong>Reverse:</strong></td>
+</tr>
+<tr>
+<td><strong>1. Positive ion mode </strong></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>M+3H</td>
+<td>M/3 + 1.007276</td>
+<td>3+</td>
+<td>0.33</td>
+<td>1.007276</td>
+<td>285.450906</td>
+<td>291.099391</td>
+</tr>
+<tr>
+<td>M+2H+Na</td>
+<td>M/3 + 8.334590</td>
+<td>3+</td>
+<td>0.33</td>
+<td>8.334590</td>
+<td>292.778220</td>
+<td>283.772077</td>
+</tr>
+<tr>
+<td>M+H+2Na</td>
+<td>M/3 + 15.7661904</td>
+<td>3+</td>
+<td>0.33</td>
+<td>15.766190</td>
+<td>300.209820</td>
+<td>276.340476</td>
+</tr>
+<tr>
+<td>M+3Na</td>
+<td>M/3 + 22.989218</td>
+<td>3+</td>
+<td>0.33</td>
+<td>22.989218</td>
+<td>307.432848</td>
+<td>269.117449</td>
+</tr>
+<tr>
+<td>M+2H</td>
+<td>M/2 + 1.007276</td>
+<td>2+</td>
+<td>0.50</td>
+<td>1.007276</td>
+<td>427.672721</td>
+<td>437.152724</td>
+</tr>
+<tr>
+<td>M+H+NH4</td>
+<td>M/2 + 9.520550</td>
+<td>2+</td>
+<td>0.50</td>
+<td>9.520550</td>
+<td>436.185995</td>
+<td>428.639450</td>
+</tr>
+<tr>
+<td>M+H+Na</td>
+<td>M/2 + 11.998247</td>
+<td>2+</td>
+<td>0.50</td>
+<td>11.998247</td>
+<td>438.663692</td>
+<td>426.161753</td>
+</tr>
+<tr>
+<td>M+H+K</td>
+<td>M/2 + 19.985217</td>
+<td>2+</td>
+<td>0.50</td>
+<td>19.985217</td>
+<td>446.650662</td>
+<td>418.174783</td>
+</tr>
+<tr>
+<td>M+ACN+2H</td>
+<td>M/2 + 21.520550</td>
+<td>2+</td>
+<td>0.50</td>
+<td>21.520550</td>
+<td>448.185995</td>
+<td>416.639450</td>
+</tr>
+<tr>
+<td>M+2Na</td>
+<td>M/2 + 22.989218</td>
+<td>2+</td>
+<td>0.50</td>
+<td>22.989218</td>
+<td>449.654663</td>
+<td>415.170782</td>
+</tr>
+<tr>
+<td>M+2ACN+2H</td>
+<td>M/2 + 42.033823</td>
+<td>2+</td>
+<td>0.50</td>
+<td>42.033823</td>
+<td>468.699268</td>
+<td>396.126177</td>
+</tr>
+<tr>
+<td>M+3ACN+2H</td>
+<td>M/2 + 62.547097</td>
+<td>2+</td>
+<td>0.50</td>
+<td>62.547097</td>
+<td>489.212542</td>
+<td>375.612903</td>
+</tr>
+<tr>
+<td>M+H</td>
+<td>M + 1.007276</td>
+<td>1+</td>
+<td>1.00</td>
+<td>1.007276</td>
+<td>854.338166</td>
+<td>875.312724</td>
+</tr>
+<tr>
+<td>M+NH4</td>
+<td>M + 18.033823</td>
+<td>1+</td>
+<td>1.00</td>
+<td>18.033823</td>
+<td>871.364713</td>
+<td>858.286177</td>
+</tr>
+<tr>
+<td>M+Na</td>
+<td>M + 22.989218</td>
+<td>1+</td>
+<td>1.00</td>
+<td>22.989218</td>
+<td>876.320108</td>
+<td>853.330782</td>
+</tr>
+<tr>
+<td>M+CH3OH+H</td>
+<td>M + 33.033489</td>
+<td>1+</td>
+<td>1.00</td>
+<td>33.033489</td>
+<td>886.364379</td>
+<td>843.286511</td>
+</tr>
+<tr>
+<td>M+K</td>
+<td>M + 38.963158</td>
+<td>1+</td>
+<td>1.00</td>
+<td>38.963158</td>
+<td>892.294048</td>
+<td>837.356842</td>
+</tr>
+<tr>
+<td>M+ACN+H</td>
+<td>M + 42.033823</td>
+<td>1+</td>
+<td>1.00</td>
+<td>42.033823</td>
+<td>895.364713</td>
+<td>834.286177</td>
+</tr>
+<tr>
+<td>M+2Na-H</td>
+<td>M + 44.971160</td>
+<td>1+</td>
+<td>1.00</td>
+<td>44.971160</td>
+<td>898.302050</td>
+<td>831.348840</td>
+</tr>
+<tr>
+<td>M+IsoProp+H</td>
+<td>M + 61.06534</td>
+<td>1+</td>
+<td>1.00</td>
+<td>61.065340</td>
+<td>914.396230</td>
+<td>815.254660</td>
+</tr>
+<tr>
+<td>M+ACN+Na</td>
+<td>M + 64.015765</td>
+<td>1+</td>
+<td>1.00</td>
+<td>64.015765</td>
+<td>917.346655</td>
+<td>812.304235</td>
+</tr>
+<tr>
+<td>M+2K-H</td>
+<td>M + 76.919040</td>
+<td>1+</td>
+<td>1.00</td>
+<td>76.919040</td>
+<td>930.249930</td>
+<td>799.400960</td>
+</tr>
+<tr>
+<td>M+DMSO+H</td>
+<td>M + 79.02122</td>
+<td>1+</td>
+<td>1.00</td>
+<td>79.021220</td>
+<td>932.352110</td>
+<td>797.298780</td>
+</tr>
+<tr>
+<td>M+2ACN+H</td>
+<td>M + 83.060370</td>
+<td>1+</td>
+<td>1.00</td>
+<td>83.060370</td>
+<td>936.391260</td>
+<td>793.259630</td>
+</tr>
+<tr>
+<td>M+IsoProp+Na+H</td>
+<td>M + 84.05511</td>
+<td>1+</td>
+<td>1.00</td>
+<td>84.055110</td>
+<td>937.386000</td>
+<td>792.264890</td>
+</tr>
+<tr>
+<td>2M+H</td>
+<td>2M + 1.007276</td>
+<td>1+</td>
+<td>2.00</td>
+<td>1.007276</td>
+<td>1707.669056</td>
+<td>1751.632724</td>
+</tr>
+<tr>
+<td>2M+NH4</td>
+<td>2M + 18.033823</td>
+<td>1+</td>
+<td>2.00</td>
+<td>18.033823</td>
+<td>1724.695603</td>
+<td>1734.606177</td>
+</tr>
+<tr>
+<td>2M+Na</td>
+<td>2M + 22.989218</td>
+<td>1+</td>
+<td>2.00</td>
+<td>22.989218</td>
+<td>1729.650998</td>
+<td>1729.650782</td>
+</tr>
+<tr>
+<td>2M+K</td>
+<td>2M + 38.963158</td>
+<td>1+</td>
+<td>2.00</td>
+<td>38.963158</td>
+<td>1745.624938</td>
+<td>1713.676842</td>
+</tr>
+<tr>
+<td>2M+ACN+H</td>
+<td>2M + 42.033823</td>
+<td>1+</td>
+<td>2.00</td>
+<td>42.033823</td>
+<td>1748.695603</td>
+<td>1710.606177</td>
+</tr>
+<tr>
+<td>2M+ACN+Na</td>
+<td>2M + 64.015765</td>
+<td>1+</td>
+<td>2.00</td>
+<td>64.015765</td>
+<td>1770.677545</td>
+<td>1688.624235</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td colspan="2">2<strong>. Negative ion mode </strong></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>M-3H</td>
+<td>M/3 - 1.007276</td>
+<td>3-</td>
+<td>0.33</td>
+<td>-1.007276</td>
+<td>283.436354</td>
+<td>293.113943</td>
+</tr>
+<tr>
+<td>M-2H</td>
+<td>M/2 - 1.007276</td>
+<td>2-</td>
+<td>0.50</td>
+<td>-1.007276</td>
+<td>425.658169</td>
+<td>439.167276</td>
+</tr>
+<tr>
+<td>M-H2O-H</td>
+<td>M- 19.01839</td>
+<td>1-</td>
+<td>1.00</td>
+<td>-19.01839</td>
+<td>834.312500</td>
+<td>895.338390</td>
+</tr>
+<tr>
+<td>M-H</td>
+<td>M - 1.007276</td>
+<td>1-</td>
+<td>1.00</td>
+<td>-1.007276</td>
+<td>852.323614</td>
+<td>877.327276</td>
+</tr>
+<tr>
+<td>M+Na-2H</td>
+<td>M + 20.974666</td>
+<td>1-</td>
+<td>1.00</td>
+<td>20.974666</td>
+<td>874.305556</td>
+<td>855.345334</td>
+</tr>
+<tr>
+<td>M+Cl</td>
+<td>M + 34.969402</td>
+<td>1-</td>
+<td>1.00</td>
+<td>34.969402</td>
+<td>888.300292</td>
+<td>841.350598</td>
+</tr>
+<tr>
+<td>M+K-2H</td>
+<td>M + 36.948606</td>
+<td>1-</td>
+<td>1.00</td>
+<td>36.948606</td>
+<td>890.279496</td>
+<td>839.371394</td>
+</tr>
+<tr>
+<td>M+FA-H</td>
+<td>M + 44.998201</td>
+<td>1-</td>
+<td>1.00</td>
+<td>44.998201</td>
+<td>898.329091</td>
+<td>831.321799</td>
+</tr>
+<tr>
+<td>M+Hac-H</td>
+<td>M + 59.013851</td>
+<td>1-</td>
+<td>1.00</td>
+<td>59.013851</td>
+<td>912.344741</td>
+<td>817.306149</td>
+</tr>
+<tr>
+<td>M+Br</td>
+<td>M + 78.918885</td>
+<td>1-</td>
+<td>1.00</td>
+<td>78.918885</td>
+<td>932.249775</td>
+<td>797.401115</td>
+</tr>
+<tr>
+<td>M+TFA-H</td>
+<td>M + 112.985586</td>
+<td>1-</td>
+<td>1.00</td>
+<td>112.985586</td>
+<td>966.316476</td>
+<td>763.334414</td>
+</tr>
+<tr>
+<td>2M-H</td>
+<td>2M - 1.007276</td>
+<td>1-</td>
+<td>2.00</td>
+<td>-1.007276</td>
+<td>1705.654504</td>
+<td>1753.647276</td>
+</tr>
+<tr>
+<td>2M+FA-H</td>
+<td>2M + 44.998201</td>
+<td>1-</td>
+<td>2.00</td>
+<td>44.998201</td>
+<td>1751.659981</td>
+<td>1707.641799</td>
+</tr>
+<tr>
+<td>2M+Hac-H</td>
+<td>2M + 59.013851</td>
+<td>1-</td>
+<td>2.00</td>
+<td>59.013851</td>
+<td>1765.675631</td>
+<td>1693.626149</td>
+</tr>
+<tr>
+<td>3M-H</td>
+<td>3M - 1.007276</td>
+<td>1-</td>
+<td>3.00</td>
+<td>1.007276</td>
+<td>2560.999946</td>
+<td>2627.952724</td>
+</tr>
+</tbody>
+</table>
+<br/>
+<p>Corrected values (C. Amsler <em>et al.</em>, "Review of Particle Physics" Physics Letters <strong>B667</strong>, 1 (2008))<br/> m(1H) = 1.00727646677 u = mass of proton; charge +1<br/>m(1H+e-) = 1.00782504 u = mass of proton + mass of electron<br/>m(e-) = 0.00054858026 u = mass of electron; charge -1<br/>m(e-) = 0.00054857990924 u = <a href="http://www.physik.uni-mainz.de/Werth/g_fak/publication/16%20-%20New%20determination%20of%20the...%20-%20Haeffner.pdf" target="_blank">new determination of electrons mass</a></p>
+<p>The ultimate source of accurate masses and isotope values are IUPAC and CAWIA (Commission on Atomic Weights and Isotopic Abundances) for a list of the latest corrected values please see Pure Appl. Chem., Vol. 75, No. 6, pp. 683&ndash;800, 2003</p>
+<p>the recommended values A(r) should be included into accurate mass calculators including corrections for positive and negative charges depending on ionization type (odd or even electron).</p>
+<p>[<a href="http://media.iupac.org/publications/pac/2003/pdf/7506x0683.pdf" target="_blank">PDF</a>] - ATOMIC WEIGHTS OF THE ELEMENTS: REVIEW 2000 (IUPAC Technical Report)</p>
+</div>
+</div>
+</div> 	</div>
+
+	
+							</div>
+
+	</div>
+
+<!--Modules ContentBottom-->
+            
+<!--End Modules ContentBottom-->
+
+</div>
+<div class="clear"></div>
+<!--End Content width and show component area-->
+           
+        
+</div>
+<div class="clear"></div></div></div>
+</div>
+
+
+
+<div id="container_copyright_footermenu" class="container"><div class="wrapper960">
+
+<div id="copyright-footermenu" class="block_holder">
+	<div id="copyright" class="module_margin"><div class="block_holder_margin">
+		<p>(c) 2016 Fiehn Lab</p>
+	</div></div>
+<div class="clear"></div>
+</div>
+</div></div>
+
+
+
+    <script type="text/javascript">var navigation=responsiveNav("#nav",{animate:true,transition:800,label:"Menu",insert:"before",customToggle:"",openPos:"relative",jsClass:"js",init:function(){},open:function(){},close:function(){}});</script>
+</body> 
+</html>
