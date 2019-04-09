@@ -6,3 +6,8 @@ data['sample name'] <- data[1]
 
 pls <- opls(data[2:(length(data)-2)], data$category, predI=1, orthoI=NA)
 pls@vipVn
+
+library(mixOmics)
+
+pls2 <- plsda(data[2:(length(data)-2)], data$category, ncomp = 2)
+VIPs <- vip(pls2)
