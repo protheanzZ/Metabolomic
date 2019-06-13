@@ -1,0 +1,2 @@
+"feature_id" "precursor_mz" "peak_id" "mz" "intensity"
+"1" "FT00017" 82.537555050088 "CP0001183" 
