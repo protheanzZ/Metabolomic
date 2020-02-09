@@ -1,2 +1,3 @@
 # Metabolomic
-processing
+### PCA：QC, Samples  
+![PCA](best_pca.png)
